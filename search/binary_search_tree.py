@@ -5,20 +5,16 @@ class BinarySearchTree:
         self.right = None
 
     def depth_first_for_each(self, cb):
-        # make a stack
-        stack = []
+        print(f"This node's value is: {self.value}")
+        cb(self.value)
         # check for a left leaf and if there is one
-        if self.left:
+        if self.left is not None:
             # run DFS on the left leaf
-            stack.append(self.left.depth_first_for_each(cb))
+            self.left.depth_first_for_each(cb)
         # check for a right leaf and if there is one
-        if self.right:
+        if self.right is not None:
             # run DFS on the right leaf
-            stack.append(self.left.depth_first_for_each(cb))
-        # after all of that add this leaf's value to the stack
-        stack.append(self.value)
-        # return stack
-        return stack
+            self.right.depth_first_for_each(cb)
 
     def breadth_first_for_each(self, cb):
         pass
@@ -57,3 +53,15 @@ class BinarySearchTree:
                 max_value = current.value
             current = current.right
         return max_value
+
+
+
+arr = []
+cb = lambda x: arr.append(x)
+bst = BinarySearchTree(5)
+bst.insert(2)
+bst.insert(3)
+bst.insert(7)
+bst.insert(9)
+bst.depth_first_for_each(cb)
+print(arr)
