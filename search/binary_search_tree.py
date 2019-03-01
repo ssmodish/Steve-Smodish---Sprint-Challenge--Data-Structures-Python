@@ -5,7 +5,7 @@ class BinarySearchTree:
         self.right = None
 
     def depth_first_for_each(self, cb):
-        print(f"This node's value is: {self.value}")
+        # send current node value to cb
         cb(self.value)
         # check for a left leaf and if there is one
         if self.left is not None:
@@ -17,7 +17,24 @@ class BinarySearchTree:
             self.right.depth_first_for_each(cb)
 
     def breadth_first_for_each(self, cb):
-        pass
+        # start a queue
+        queue = []
+        # add this node to the queue
+        queue.append(self)
+        # while there are items in the queue
+        while len(queue) > 0:
+            # dequeue the oldest node
+            current_item = queue.pop(0)
+            # send the value to the cb
+            cb(current_item.value)
+            # add any children to the queue
+            if current_item.left is not None:
+                queue.append(current_item.left)
+            if current_item.right is not None:
+                queue.append(current_item.right)
+
+
+
 
     def insert(self, value):
         new_tree = BinarySearchTree(value)
@@ -59,9 +76,10 @@ class BinarySearchTree:
 arr = []
 cb = lambda x: arr.append(x)
 bst = BinarySearchTree(5)
-bst.insert(2)
 bst.insert(3)
-bst.insert(7)
+bst.insert(4)
+bst.insert(10)
 bst.insert(9)
-bst.depth_first_for_each(cb)
+bst.insert(11)
+bst.breadth_first_for_each(cb)
 print(arr)
