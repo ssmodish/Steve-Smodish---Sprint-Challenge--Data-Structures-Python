@@ -56,14 +56,21 @@ names_2 = f.read().split("\n")  # List containing 10000 names
 f.close()
 
 duplicates = []
-bst = BinarySearchTree(names_1.pop(0))
-for name_1 in names_1:
-    bst.insert(name_1)
+# bst = BinarySearchTree(names_1.pop(0))
+# for name_1 in names_1:
+#     bst.insert(name_1)
+#
+#
+# for name_2 in names_2:
+#     if bst.contains(name_2):
+#         duplicates.append(name_2)
 
+names_1_set = set(names_1)
 
-for name_2 in names_2:
-    if bst.contains(name_2):
-        duplicates.append(name_2)
+for name in names_2:
+    if name in names_1_set:
+        duplicates.append(name)
+
 
 end_time = time.time()
 print (f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
